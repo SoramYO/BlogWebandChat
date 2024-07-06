@@ -1,3 +1,5 @@
+CREATE DATABASE blog_codeto
+
 CREATE TABLE [Users] (
     id INT IDENTITY(1,1) PRIMARY KEY,
     email NVARCHAR(255) NOT NULL,
