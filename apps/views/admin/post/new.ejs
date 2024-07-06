@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create post</title>
+
+    <%- include('../layout/head') %>
+        <!-- Place the first <script> tag in your HTML's <head> -->
+        <script src="https://cdn.tiny.cloud/1/ri131ytlz0k9b0xyp4eqrlhq19wpr7ngx1eu6ygg4pve5x77/tinymce/7/tinymce.min.js"
+            referrerpolicy="origin"></script>
+
+
+        <!-- Place the following <script> and <textarea> tags your HTML's <body> -->
+        <script>
+            tinymce.init({
+                selector: 'textarea',
+                plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss markdown',
+                toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+                tinycomments_mode: 'embedded',
+                tinycomments_author: 'Author name',
+                mergetags_list: [
+                    { value: 'First.Name', title: 'First Name' },
+                    { value: 'Email', title: 'Email' },
+                ],
+                ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
+            });
+        </script>
+</head>
+
+<body>
+    <div class="container">
+        <%- include('../layout/navbar') %>
+            <!-- create a form to create new post -->
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>Create post</h1>
+                    <% if (data && data.error) { %>
+                        <div id="signupalert" class="alert alert-danger">
+                            <p>Error:</p>
+                            <span>
+                                <%= data.error %>
+                            </span>
+                        </div>
+                        <% } %>
+                            <form action="/admin/post/new" method="POST">
+                                <div class="form-group">
+                                    <label for=" title">Title</label>
+                                    <input type="text" class="form-control" id="title" name="title" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for=" content">Content</label>
+                                    <textarea name="content">
+                                Welcome to Soram Blog!
+                            </textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for=" author">Author</label>
+                                    <input type="text" class="form-control" id="author" name="author" required>
+                                </div>
+                                <div class="form-group mt-3">
+                                    <button type="submit" class="btn btn-primary">Create post</button>
+                                </div>
+                            </form>
+                </div>
+            </div>
+    </div>
+
+</body>
+
+</html>

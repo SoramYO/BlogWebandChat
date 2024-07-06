@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <%- include('layout/head') %>
+</head>
+
+<body>
+    <%- include('layout/navbar') %>
+
+        <!-- create table to manage posts  -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>Posts</h1>
+                    <a href="/admin/post/new" class="btn btn-primary">Create post</a>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Title</th>
+                                <th scope="col">Content</th>
+                                <th scope="col">Author</th>
+                                <th scope="col">Created at</th>
+                                <th scope="col">Updated at</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%if(data && data.posts) { %>
+                                <% posts=data.posts %>
+                                    <% posts.forEach(post=> { %>
+                                        <tr>
+                                            <th scope="row">
+                                                <%= post.id %>
+                                            </th>
+                                            <td>
+                                                <%= post.title %>
+                                            </td>
+                                            <td>
+                                                <%= post.content %>
+                                            </td>
+                                            <td>
+                                                <%= post.author %>
+                                            </td>
+                                            <td>
+                                                <%= post.created_at %>
+                                            </td>
+                                            <td>
+                                                <%= post.updated_at %>
+                                            </td>
+                                            <td>
+                                                <a href="/admin/post/<%= post.id %>" class="btn btn-primary">View</a>
+                                                <a href="/admin/post/edit/<%= post.id %>"
+                                                    class="btn btn-warning">Edit</a>
+                                                <input type="hidden" name="_method" value="DELETE">
+                                                <button type="submit" class="btn btn-danger post_delete"
+                                                    post_id="<%= post.id %>">Delete</button>
+
+                                            </td>
+                                        </tr>
+                                        <% }) %>
+
+                                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <script type="text/javaScript" src="/static/js/post.js"></script>
+</body>
+
+</html>

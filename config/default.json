@@ -1,0 +1,21 @@
+{
+    "server": {
+        "host": "0.0.0.0",
+        "port": 8080
+    },
+    "sql": {
+        "user": "sa",
+        "password": "12345",
+        "server": "localhost",
+        "database": "blog_codeto",
+        "options": {
+            "encrypt": true,
+            "enableArithAbort": true
+        },
+        "port": 1433
+    },
+    "saltRounds": 10,
+    "session": {
+        "secret": "secret"
+    }
+}
